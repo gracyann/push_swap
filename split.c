@@ -6,7 +6,7 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:56:17 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/21 17:35:04 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:18:07 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,4 @@ char **split(char *str, char delimiter)
     result[i] = NULL;
 
     return result;
-}
-
-void sort_list(t_list **a, t_list **b)
-{
-    int len = list_len(*a);
-
-    if (len == 2)
-        sa(a, false);
-    else if (len == 3)
-        sort_three(a);
-    else
-        sort_stacks(a, b);
 }

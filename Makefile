@@ -1,17 +1,32 @@
-NAME = push_swap
+NAME		= push_swap
 
-SRCS = push_swap.c
+CC			= gcc
 
-OBJS = ${SRCS:.c=.o}
+CFLAGS		= -Wall -Werror -Wextra
 
-CC = gcc
+LIBFT		= ./libft/libft.a
 
-CFLAGS = -Wall -Werror -Wextra
+SRCS		= main.c \
+			init.c \
+			push_swap_utils.c \
+			split.c \
+			./Operations/push.c \
+			./Operations/swap.c \
+			./Operations/rotate.c \
+			./Operations/reverse_rotate.c 
+
+OBJS 	= ${SRCS:.c=.o}
+
+.c.o:
+		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 all : ${NAME}
 
-${NAME} : ${OBJS}
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+${NAME} : ${OBJS} ${LIBFT}
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+
+$(LIBFT):
+					@make -C ./libft
 
 clean :
 	rm -f ${OBJS}

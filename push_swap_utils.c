@@ -6,48 +6,72 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 14:43:07 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/10/11 14:13:25 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:06:13 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void ft_lstadd_front (t_list **lst, t_list *new)
+int	stack_len(t_list *stack)
 {
-    if (!lst || !new)
-        return ;
-    new->next = *lst;
-    new->prev = NULL;
-    if(*lst)
-        (*lst)->prev = new;
-    *lst = new;
+	int	count = 0;
+
+	while (stack)
+	{
+		stack = stack->next;
+		count++;
+	}
+	return (count);
 }
 
-int ft_atoi(char *str)
+t_list	*find_last(t_list *stack)
 {
-   int i;
-   int result;
-   int sign;
+	while (stack && stack->next)
+		stack = stack->next;
+	return (stack);
+}
 
-    i = 0;
-    result = 0;
-    sign = 1;
+bool	stack_sorted(t_list *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->nb > stack->next->nb)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}
 
-    while((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-        i++;
-    if (str[i] == '-')
-    {
-        sign = -1;
-        i++;
-    }
-    else if(str[i] == '+')
-        i++;
-    while(str[i] && (str[i] >= '0' && str[i] <= '9'))
-    {
-        result = result * 10;
-        result = result + (str[i] - '0');
-        i++;
-    }
-    result = result * sign;
-    return result;
+t_list	*find_min(t_list *stack)
+{
+	long			min = LONG_MAX;
+	t_list	*min_node = NULL;
+
+	while (stack)
+	{
+		if (stack->nb < min)
+		{
+			min = stack->nb;
+			min_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (min_node);
+}
+
+t_list	*find_max(t_list *stack)
+{
+	long			max = LONG_MIN;
+	t_list	*max_node = NULL;
+
+	while (stack)
+	{
+		if (stack->nb > max)
+		{
+			max = stack->nb;
+			max_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (max_node);
 }
