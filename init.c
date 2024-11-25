@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
+/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:27:47 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/21 18:03:45 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/24 22:27:37 by gracyann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static long	str_to_int(const char *s)
+int	str_to_int(const char *s) 
 {
-	long	result;
+	int	result;
 	int		sign;
 
 	result = 0;
@@ -32,6 +32,7 @@ static long	str_to_int(const char *s)
 		result = result * 10 + (*s++ - '0');
 	return (result * sign);
 }
+
 static void	add_node(t_list **stack, int value)
 {
 	t_list	*node;
@@ -57,19 +58,18 @@ static void	add_node(t_list **stack, int value)
 		node->prev = last_node;
 	}
 }
-void	init_a(t_list **a, char **argv)
+void init_a(t_list **a, char **argv)
 {
-	long	value;
-	int		i;
+    long value;
+    int i;
 
-	i = 0;
-	while (argv[i])
-	{
-		if (error_syntax(argv[i]) || (value = str_to_int(argv[i])) > INT_MAX || value < INT_MIN || error_duplicate(*a, (int)value))
-			free_errors(a);
-		add_node(a, (int)value);
-		i++;
-	}
+    i = 0;
+    while (argv[i])
+    {
+        value = str_to_int(argv[i]);
+        add_node(a, (int)value);
+        i++;
+    }
 }
 
 t_list	*get_optimal_node(t_list *stack)
@@ -93,16 +93,16 @@ void	prep_for_push(t_list **stack,t_list *top_node,
 		if (stack_name == 'a')
 		{
 			if (top_node->above_median)
-				ra(stack, false);
+				rotate_a(stack);
 			else
-				rra(stack, false);
+				reverse_ra(stack);
 		}
 		else if (stack_name == 'b')
 		{
 			if (top_node->above_median)
-				rb(stack, false);
+				rotate_b(stack);
 			else
-				rrb(stack, false);
+				reverse_rb(stack);
 		}
 	}
 }

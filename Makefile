@@ -8,12 +8,17 @@ LIBFT		= ./libft/libft.a
 
 SRCS		= main.c \
 			init.c \
-			push_swap_utils.c \
+			error_handling.c \
+			init_a.c \
+			init_b.c \
 			split.c \
 			./Operations/push.c \
 			./Operations/swap.c \
 			./Operations/rotate.c \
-			./Operations/reverse_rotate.c 
+			./Operations/reverse_rotate.c \
+			./Operations/utils.c \
+			./Operations/arrange_stacks.c \
+			./Operations/arrange_three.c
 
 OBJS 	= ${SRCS:.c=.o}
 

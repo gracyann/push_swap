@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
+/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:54:28 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/22 16:58:07 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/24 19:26:06 by gracyann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,21 @@
 
 int	error_syntax(char *str)
 {
-	if (!(*str == '+' || *str == '-' || (*str >= '0' && *str <= '9')))
+	int	i;
+	i = 0;
+	if (!(str[i] == '+' || str[i] == '-' || (str[i] >= '0' && str[i] <= '9')))
 		return (1);
-	if ((*str == '+' || *str == '-') && !(str[1] >= '0' && str[1] <= '9'))
+	if ((str[i] == '+' || str[i] == '-') && !(str[1] >= '0' && str[1] <= '9'))
 		return (1);
-	while (*++str)
-		if (!(*str >= '0' && *str <= '9'))
+	i++;
+	while (str[i])
+		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (1);
+		i++;
 	return (0);
 }
 
-int	error_duplicate(t_list *a, int n)
-{
-	while (a)
-	{
-		if (a->nb == n)
-			return (1);
-		a = a->next;
-	}
-	return (0);
-}
-
-void	free_stack(t_list **stack)
+void	free_list(t_list **stack)
 {
 	t_list	*tmp;
 
@@ -47,9 +40,33 @@ void	free_stack(t_list **stack)
 	}
 }
 
-void	free_errors(t_list **a)
+void free_errors(t_list **a)
 {
-	free_stack(a);
-	ft_printf("Error\n");
-	exit(1);
+    free_list(a);
+    write(2, "Error\n", 6);
+    exit(EXIT_FAILURE);
+}
+
+int	list_len(t_list *stack)
+{
+	int	count = 0;
+
+	while (stack)
+	{
+		stack = stack->next;
+		count++;
+	}
+	return (count);  
+}
+
+void sort_list(t_list **a, t_list **b)
+{
+    int len = list_len(*a);
+
+    if (len == 2)
+        swap_a(a);
+    else if (len == 3)
+        arrange_three(a);
+    else
+        arrange_stacks(a, b);
 }
