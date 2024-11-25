@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   arrange_three.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 15:18:46 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:33:58 by gracyann         ###   ########.fr       */
+/*   Created: 2024/11/24 15:21:07 by gracyann          #+#    #+#             */
+/*   Updated: 2024/11/24 18:03:47 by gracyann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap(t_list **list)
+void	arrange_three(t_list **a)
 {
-	int temp;
-	if (!list || !(*list)->next)
-		return ;
-	temp = (*list)->nb;
-	(*list)->nb = (*list)->next->nb;
-	(*list)->next->nb = temp;
-}
+	t_list	*biggest_node;
 
-void swap_a(t_list **pa)
-{
-	swap(pa);
-	write(1, "sa\n", 3);
-}
-
-void swap_b(t_list **pb)
-{
-	swap(pb);
-	write(1, "sb\n", 3);
-}
-
-void swap_ss(t_list **pa, t_list **pb)
-{
-	swap(pa);
-	swap(pb);
-	write(1, "ss\n", 3);
+	biggest_node = find_max(*a);
+	if (biggest_node == *a)
+		rotate_a(a, false);
+	else if ((*a)->next == biggest_node)
+		reverse_ra(a, false);
+	if ((*a)->nb > (*a)->next->nb)
+		swap_a(a, false);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
+/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:48:49 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/10/10 15:59:08 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/24 22:40:09 by gracyann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 void push_a(t_list **a, t_list **b)
 {
