@@ -1,42 +1,46 @@
-NAME		= push_swap
+NAME = push_swap
 
-CC			= gcc
+CFLAGS = -Werror -Wall -Wextra 
 
-CFLAGS		= -Wall -Werror -Wextra
+RM = rm -rf
 
-LIBFT		= ./libft/libft.a
+LIBFT_PATH	=	./libft
 
-SRCS		= main.c \
-			init.c \
-			error_handling.c \
-			init_a.c \
-			init_b.c \
-			split.c \
-			./Operations/push.c \
-			./Operations/swap.c \
-			./Operations/rotate.c \
-			./Operations/reverse_rotate.c \
-			./Operations/utils.c \
-			./Operations/arrange_stacks.c \
-			./Operations/arrange_three.c
+SRCS =  main.c \
+		arrange_stacks.c \
+		arrange_three.c \
+		init_a.c \
+		init_b.c \
+		init.c \
+		list_manip.c \
+		error_handling.c \
+		push.c \
+		rotate.c \
+		reverse_rotate.c \
+		swap.c \
+		utils.c \
+		main_utils.c
 
-OBJS 	= ${SRCS:.c=.o}
+OBJS = $(SRCS:.c=.o)
 
-.c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+LIBFT = $(LIBFT_PATH)/libft.a
 
-all : ${NAME}
+INCLUDE = -I include
 
-${NAME} : ${OBJS} ${LIBFT}
-	${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+all :	$(NAME)
 
-$(LIBFT):
-					@make -C ./libft
+$(NAME) :	$(OBJS) $(LIBFT)
+		cc $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBFT) -o $(NAME)
 
-clean :
-	rm -f ${OBJS}
+$(LIBFT) :
+		@make -C $(LIBFT_PATH)
 
 fclean : clean
-	rm -f ${NAME}
+				$(RM) $(NAME)
+				make fclean -C $(LIBFT_PATH)
+
+clean :
+		$(RM) $(OBJS)
+		make clean -C $(LIBFT_PATH)
 
 re : fclean all

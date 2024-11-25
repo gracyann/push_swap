@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:00:19 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 17:57:01 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:10:42 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
-void ft_lstadd_front (t_list **lst, t_list *new)
+bool	list_is_ordered(t_list *stack)
 {
-    if (!lst || !new)
-        return ;
-    new->next = *lst;
-    new->prev = NULL;
-    if(*lst)
-        (*lst)->prev = new;
-    *lst = new;
+	if (!stack)
+		return (1);
+	while (stack->next)
+	{
+		if (stack->nb > stack->next->nb)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
 }
 
 t_list	*find_last(t_list *stack)

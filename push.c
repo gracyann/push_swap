@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:48:49 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:40:09 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 09:30:25 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void push_a(t_list **a, t_list **b)
     temp->prev=NULL;
     temp->next=NULL;
     ft_lstadd_front(a, temp);
-    write(1, "pa\n", 3);
+    write(1, "pa\n", 3); 
 }
 
 void push_b(t_list **a, t_list **b)

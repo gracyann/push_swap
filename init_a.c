@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:39:28 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 21:36:23 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:59:33 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,18 @@ static void	calculate_stack_operation(t_list *a, t_list *b)
 
 	while (a)
 	{
-		if (a->above_median)
-			a->operation_count = a->i;
-		else
-			a->operation_count = len_a - a->i;
-
-		if (a->match_node->above_median)
+		a->operation_count = a->i;
+		if (!(a->above_median))
+		{
+			a->operation_count = len_a - (a->i);
+		}
+		if (a->match_node && a->match_node->above_median)
+		{
 			a->operation_count += a->match_node->i;
-		else
-			a->operation_count += len_b - a->match_node->i;
-
+		}
+		
+		else if (a->match_node)
+			a->operation_count += len_b - (a->match_node->i);
 		a = a->next;
 	}
 }
@@ -97,9 +99,14 @@ void	set_optimal(t_list *stack)
 
 void	init_nodes_a(t_list *a, t_list *b)
 {
+	// printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	current_index(a);
+	// printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	current_index(b);
+	// printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	set_match_a(a, b);
+	// printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	calculate_stack_operation(a, b);
+	// printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	set_optimal(a);
 }

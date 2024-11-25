@@ -3,24 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   arrange_stacks.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:49:17 by gracyann          #+#    #+#             */
-/*   Updated: 2024/11/24 21:39:05 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:12:57 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	align_stacks(t_list **a, t_list **b, t_list *optimal_node, int direction)
+static void	align_stacks(t_list **a, t_list **b, t_list *optimal_node)
 {
-	while (*a != optimal_node || *b != optimal_node->match_node)
-	{
-		if (direction == 1)
-			reverse_rotate(a, b, false);
-		else
-			reverse_rrr(a, b, false);
-	}
+	while (*b != optimal_node->match_node
+		&& *a != optimal_node)
+		reverse_rrr(a, b);
+	current_index(*a);
+	current_index(*b);
 }
 
 static void	move_optimal_to_b(t_list **a, t_list **b)
@@ -28,13 +26,17 @@ static void	move_optimal_to_b(t_list **a, t_list **b)
 	t_list	*optimal_node = get_optimal_node(*a);
 
 	if (optimal_node->above_median && optimal_node->match_node->above_median)
-		align_stacks(a, b, optimal_node, 1);
+	{
+		printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
+		align_stacks(a, b, optimal_node);
+		printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
+	}
 	else if (!optimal_node->above_median && !optimal_node->match_node->above_median)
-		align_stacks(a, b, optimal_node, -1);
-
+		align_stacks(a, b, optimal_node);
+	printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	prep_for_push(a, optimal_node, 'a');
 	prep_for_push(b, optimal_node->match_node, 'b');
-	push_b(b, a, false);
+	push_b(b, a);
 }
 
 static void	move_all_b_to_a(t_list **a, t_list **b)
@@ -42,20 +44,20 @@ static void	move_all_b_to_a(t_list **a, t_list **b)
 	while (*b)
 	{
 		prep_for_push(a, (*b)->match_node, 'a');
-		push_a(a, b, false);
+		push_a(a, b);
 	}
 }
 
-static void	bring_min_to_top(t_list **a)
+static void	bring_min_on_top(t_list **a)
 {
 	t_list	*min_node = find_min(*a);
 
 	while ((*a)->nb != min_node->nb)
 	{
 		if (min_node->above_median)
-			rotate_a(a, false);
+			rotate_a(a);
 		else
-			rra(a, false);
+			reverse_ra(a);
 	}
 }
 
@@ -65,14 +67,15 @@ void	arrange_stacks(t_list **a, t_list **b)
 	int	len_a;
 
 	len_a = list_len(*a);
-	if (len_a-- > 3 && !list_is_ordered(*a)) 
-		push_b(b, a, false);
 	if (len_a-- > 3 && !list_is_ordered(*a))
-		push_b(b, a, false);
+		push_b(a, b);
+	if (len_a-- > 3 && !list_is_ordered(*a))
+		push_b(a, b);
 	while (len_a-- > 3 && !list_is_ordered(*a))
 	{
-		init_nodes_a(*a, *b); 
-		move_optimal_to_b(a, b); 
+		init_nodes_a(*a, *b);
+		move_optimal_to_b(a, b);
+		printf("%d ----- %s ::::: Ploup ploup\n\n", __LINE__, __FILE__);
 	}
 	arrange_three(a);
 	while (*b) 

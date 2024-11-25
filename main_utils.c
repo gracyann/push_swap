@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 16:09:56 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/25 18:00:25 by arakotoa         ###   ########.fr       */
+/*   Created: 2024/11/25 14:54:39 by arakotoa          #+#    #+#             */
+/*   Updated: 2024/11/25 14:55:05 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_list(t_list *a)
+void	free_list(t_list **stack)
 {
-	while (a)
+	t_list	*tmp;
+
+	while (*stack)
 	{
-		printf("-----> %ld\n\n", a->nb);
-		a = a->next;
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
 	}
 }
 
-int	main(int argc, char **argv)
+int	list_len(t_list *stack)
 {
-	t_list	*a = NULL;
-	t_list	*b = NULL;
-	if (checking_no_digit(argc, argv) == 1 || argc == 1)
-		return (0);
-	init_a(argc, argv, &a);
-	if (check_duplicates(a)
-		|| checking_overflow(a) || !checking_if_sorted(a))
+	int	count = 0;
+
+	while (stack)
 	{
-		free_list(&a);
-		return (0);
+		stack = stack->next;
+		count++;
 	}
-    sort_list(&a, &b);
-	print_list(a);
-	free_list(&a); 
-	return (0);
+	return (count);  
+}
+
+void sort_list(t_list **a, t_list **b)
+{
+    int len = list_len(*a);
+
+    if (len == 2)
+        swap_a(a);
+    else if (len == 3)
+        arrange_three(a);
+    else
+        arrange_stacks(a, b);
 }

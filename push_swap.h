@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:21:50 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:38:21 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:25:58 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # include <limits.h>
 # include <stdbool.h>
 # include "./libft/libft.h"
+#include <stdio.h>
 
 typedef struct	s_list
 {
-	int		nb;
-	int		i;
-	int		operation_count;
-	bool	optimal_node;
-	bool	above_median;
+	long		nb;
+	int			i;
+	int			operation_count;
+	bool		optimal_node;
+	bool		above_median;
 	struct s_list *match_node;
 	struct s_list *next;
 	struct s_list *prev;
@@ -50,8 +51,6 @@ t_list	*find_last(t_list *stack);
 t_list	*find_min(t_list *stack);
 t_list	*find_max(t_list *stack);
 
-int	error_syntax(char *str);
-void free_errors(t_list **a);
 int	list_len(t_list *stack);
 
 void	init_nodes_a(t_list *a, t_list *b);
@@ -62,13 +61,18 @@ void	init_nodes_b(t_list *a, t_list *b);
 void	prep_for_push(t_list **stack,t_list *top_node,
 						char stack_name);
 t_list	*get_optimal_node(t_list *stack);
-void init_a(t_list **a, char **argv);
+void	init_a(int argc, char **argv, t_list **pile_a);
 bool	list_is_ordered(t_list *stack);
-char **split(char *str, char delimiter);
 int main(int argc, char **argv);
 void sort_list(t_list **a, t_list **b);
 void	free_list(t_list **stack);
-int	str_to_int(const char *s);
-
+int	checking_if_sorted(t_list *lst);
+int checking_no_digit(int argc, char **argv);
+int check_duplicates(t_list *lst);
+int	checking_overflow(t_list *lst);
+t_list	*ft_lstnew(long content);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void ft_lstadd_front (t_list **lst, t_list *new);
 
 #endif

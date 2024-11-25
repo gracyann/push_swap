@@ -3,70 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:54:28 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 19:26:06 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:22:44 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	error_syntax(char *str)
+int print_error(const char *message)
 {
-	int	i;
-	i = 0;
-	if (!(str[i] == '+' || str[i] == '-' || (str[i] >= '0' && str[i] <= '9')))
-		return (1);
-	if ((str[i] == '+' || str[i] == '-') && !(str[1] >= '0' && str[1] <= '9'))
-		return (1);
-	i++;
-	while (str[i])
-		if (!(str[i] >= '0' && str[i] <= '9'))
+    write(2, message, 6);
+    return (1);
+}
+
+int checking_no_digit(int argc, char **argv)
+{
+    int i;
+    int j;
+
+    i = 1; 
+    while (i < argc)
+    {
+        j = 0;
+        if (argv[i][j] == '\0')
+            return print_error("Error\n");
+        while (argv[i][j] != '\0')
+        {
+            if ((argv[i][j] == '-' || argv[i][j] == '+')
+				&& !ft_isdigit(argv[i][j + 1]))
+				return print_error("Error\n");
+			else if ((argv[i][j] >= '0' && argv[i][j] <= '9')
+				|| argv[i][j] == ' ' || argv[i][j] == '-' || argv[i][j] == '+')
+				j++;
+			else
+				return print_error("Error\n");
+        }
+        i++;
+    }
+    return (0);
+}
+int	checking_if_sorted(t_list *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next != NULL)
+	{
+		if (lst->nb > lst->next->nb)
 			return (1);
-		i++;
+		lst = lst->next;
+	}
 	return (0);
 }
 
-void	free_list(t_list **stack)
+int check_duplicates(t_list *lst)
+{
+    for (t_list *current = lst; current; current = current->next)
+    {
+        for (t_list *temp = current->next; temp; temp = temp->next)
+        {
+            if (current->nb == temp->nb)
+                return print_error("Error\n");
+        }
+    }
+    return (0);
+}
+int	checking_overflow(t_list *lst)
 {
 	t_list	*tmp;
 
-	while (*stack)
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		tmp = (*stack)->next;
-		free(*stack);
-		*stack = tmp;
+		if (tmp->nb > INT_MAX || tmp->nb < INT_MIN)
+		{
+			write(1, "Error\n", 6);
+			return (1);
+		}
+		tmp = tmp->next;
 	}
-}
-
-void free_errors(t_list **a)
-{
-    free_list(a);
-    write(2, "Error\n", 6);
-    exit(EXIT_FAILURE);
-}
-
-int	list_len(t_list *stack)
-{
-	int	count = 0;
-
-	while (stack)
-	{
-		stack = stack->next;
-		count++;
-	}
-	return (count);  
-}
-
-void sort_list(t_list **a, t_list **b)
-{
-    int len = list_len(*a);
-
-    if (len == 2)
-        swap_a(a);
-    else if (len == 3)
-        arrange_three(a);
-    else
-        arrange_stacks(a, b);
+	return (0);
 }

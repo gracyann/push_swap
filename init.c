@@ -3,75 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:27:47 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:27:37 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:46:37 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	str_to_int(const char *s) 
+int	how_many_digit(long n)
 {
-	int	result;
-	int		sign;
+	long	c;
 
-	result = 0;
-	sign = 1; 
-	while (*s == ' ' || *s == '\t' || *s == '\n' || \
-			*s == '\r' || *s == '\f' || *s == '\v')
-		s++;
-	if (*s == '-' || *s == '+')
+	c = 0;
+	if (n <= 0)
+		c = 1;
+	while (n != 0)
 	{
-		if (*s == '-')
-			sign = -1;
-		s++;
+		n = n / 10;
+		c++;
 	}
-	while (ft_isdigit(*s))
-		result = result * 10 + (*s++ - '0');
-	return (result * sign);
+	return (c);
 }
 
-static void	add_node(t_list **stack, int value)
+void	init_a(int argc, char **argv, t_list **pile_a)
 {
-	t_list	*node;
-	t_list	*last_node;
-	
-	if (!stack)
-		return ;
-	node = malloc(sizeof(t_list));
-	if (!node)
-		return ;
-	node->next = NULL;
-	node->nb = value;
-	node->optimal_node = 0;
-	if (!(*stack))
+	t_list	*temp;
+	int		i;
+	int		j;
+
+	i = 1;
+	while (i < argc)
 	{
-		*stack = node;
-		node->prev = NULL;
-	}
-	else
-	{
-		last_node = find_last(*stack);
-		last_node->next = node;
-		node->prev = last_node;
+		j = 0;
+		while (argv[i][j] != '\0')
+		{
+			while (argv[i][j] == ' ')
+				j++;
+			if (argv[i][j] == '+')
+				j += 1;
+			temp = ft_lstnew(ft_atoi(&argv[i][j]));
+			ft_lstadd_back(pile_a, temp);
+			j += how_many_digit(temp->nb);
+			while (argv[i][j] == 32)
+				j++;
+		}
+		i++;
 	}
 }
-void init_a(t_list **a, char **argv)
-{
-    long value;
-    int i;
-
-    i = 0;
-    while (argv[i])
-    {
-        value = str_to_int(argv[i]);
-        add_node(a, (int)value);
-        i++;
-    }
-}
-
 t_list	*get_optimal_node(t_list *stack)
 {
 	if (!stack)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:49:19 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:32:43 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:16:34 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void rotate(t_list **list)
 	while((*list)->next != NULL)
 	{
 		(*list)->nb = (*list)->next->nb;
-		list = (*list)->next;
+		list = &(*list)->next;
 	}
 	(*list)->nb = temp;
 }
@@ -37,7 +37,7 @@ void rotate_b(t_list **b)
 	write(1, "rb\n", 3);
 }
 
-void rotate_rr(t_list **a, t_list *b)
+void rotate_rr(t_list **a, t_list **b)
 {
 	rotate(a);
 	rotate(b);

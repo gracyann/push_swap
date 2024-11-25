@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:49:18 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:32:39 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:17:38 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void reverse_rotate(t_list **list)
 {
 	int	temp;
-	t_list **i;
-	i = list;
-	while((*i)->next)
-		i = (*i)->next;
-	temp = (*i)->nb;
-	while((*i)->prev)
+	t_list *i;
+	i = *list;
+	while (i->next)
+		i = i->next;
+	temp = (i)->nb;
+	while((i)->prev)
 	{
-		i = (*i)->prev->nb;
-		i = (*i)->prev;
+		i->nb = (i)->prev->nb;
+		i = (i)->prev;
 	}
-	(*i)->nb = temp;
+	(i)->nb = temp;
 }
 void reverse_ra(t_list **a)
 {

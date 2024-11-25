@@ -6,7 +6,7 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:54:37 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/03/19 17:01:43 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:45:26 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	**ft_function(char **tab, char const *s, char c)
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**tab;
 
