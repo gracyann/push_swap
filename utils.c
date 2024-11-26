@@ -6,11 +6,11 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:00:19 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/25 17:10:42 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:27:28 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 bool	list_is_ordered(t_list *stack)
 {
@@ -32,12 +32,13 @@ t_list	*find_last(t_list *stack)
 	return (stack);
 }
 
-
 t_list	*find_min(t_list *stack)
 {
-	long			min = LONG_MAX;
-	t_list	*min_node = NULL;
+	long	min;
+	t_list	*min_node;
 
+	min = LONG_MAX;
+	min_node = NULL;
 	while (stack)
 	{
 		if (stack->nb < min)
@@ -52,9 +53,11 @@ t_list	*find_min(t_list *stack)
 
 t_list	*find_max(t_list *stack)
 {
-	long			max = LONG_MIN;
-	t_list	*max_node = NULL;
+	long	max;
+	t_list	*max_node;
 
+	max = LONG_MIN;
+	max_node = NULL;
 	while (stack)
 	{
 		if (stack->nb > max)

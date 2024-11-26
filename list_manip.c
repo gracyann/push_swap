@@ -6,7 +6,7 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:48:00 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/25 15:09:17 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:33:29 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(long content)
 {
 	t_list	*new;
 
-	new = malloc(sizeof(t_list));
+	new = ft_calloc(sizeof(t_list), 1);
 	if (!new)
 		return (0);
 	new->prev = NULL;
@@ -35,6 +35,7 @@ t_list	*ft_lstlast(t_list *lst)
 	}
 	return (lst);
 }
+
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
@@ -50,13 +51,14 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		new->prev = temp;
 	}
 }
-void ft_lstadd_front (t_list **lst, t_list *new)
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-    if (!lst || !new)
-        return ;
-    new->next = *lst;
-    new->prev = NULL;
-    if(*lst)
-        (*lst)->prev = new;
-    *lst = new;
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	new->prev = NULL;
+	if (*lst)
+		(*lst)->prev = new;
+	*lst = new;
 }

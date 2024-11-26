@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gracyann <gracyann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:18:46 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/24 22:33:58 by gracyann         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:25:44 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap(t_list **list)
+void	swap(t_list **list)
 {
-	int temp;
+	int	temp;
+
 	if (!list || !(*list)->next)
 		return ;
 	temp = (*list)->nb;
@@ -22,19 +23,19 @@ void swap(t_list **list)
 	(*list)->next->nb = temp;
 }
 
-void swap_a(t_list **pa)
+void	swap_a(t_list **pa)
 {
 	swap(pa);
 	write(1, "sa\n", 3);
 }
 
-void swap_b(t_list **pb)
+void	swap_b(t_list **pb)
 {
 	swap(pb);
 	write(1, "sb\n", 3);
 }
 
-void swap_ss(t_list **pa, t_list **pb)
+void	swap_ss(t_list **pa, t_list **pb)
 {
 	swap(pa);
 	swap(pb);

@@ -1,6 +1,6 @@
 NAME = push_swap
 
-CFLAGS = -Werror -Wall -Wextra 
+CFLAGS = -Werror -Wall -Wextra -g
 
 RM = rm -rf
 

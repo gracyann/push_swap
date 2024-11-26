@@ -6,7 +6,7 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:27:47 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/25 14:46:37 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:28:58 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_a(int argc, char **argv, t_list **pile_a)
 		i++;
 	}
 }
+
 t_list	*get_optimal_node(t_list *stack)
 {
 	if (!stack)
@@ -65,8 +66,7 @@ t_list	*get_optimal_node(t_list *stack)
 	return (NULL);
 }
 
-void	prep_for_push(t_list **stack,t_list *top_node,
-						char stack_name)
+void	prep_for_push(t_list **stack, t_list *top_node, char stack_name)
 {
 	while (*stack != top_node)
 	{

@@ -6,25 +6,19 @@
 /*   By: arakotoa <arakotoa@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:09:56 by arakotoa          #+#    #+#             */
-/*   Updated: 2024/11/25 18:00:25 by arakotoa         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:20:42 by arakotoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_list(t_list *a)
-{
-	while (a)
-	{
-		printf("-----> %ld\n\n", a->nb);
-		a = a->next;
-	}
-}
-
 int	main(int argc, char **argv)
 {
-	t_list	*a = NULL;
-	t_list	*b = NULL;
+	t_list	*a;
+	t_list	*b;
+
+	a = NULL;
+	b = NULL;
 	if (checking_no_digit(argc, argv) == 1 || argc == 1)
 		return (0);
 	init_a(argc, argv, &a);
@@ -34,8 +28,7 @@ int	main(int argc, char **argv)
 		free_list(&a);
 		return (0);
 	}
-    sort_list(&a, &b);
-	print_list(a);
-	free_list(&a); 
+	sort_list(&a, &b);
+	free_list(&a);
 	return (0);
 }
